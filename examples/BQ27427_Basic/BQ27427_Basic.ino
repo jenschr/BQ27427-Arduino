@@ -21,10 +21,37 @@ Arduino 1.6.7
 SparkFun Battery Babysitter v1.0
 Arduino Uno (any 'duino should do)
 ******************************************************************************/
-#include <SparkFunBQ274xx.h>
+//#include <ArduinoLog.h>
+#include <Wire.h>
+#include "BQ27427.h"
 
 // Set BATTERY_CAPACITY to the design capacity of your battery.
-const unsigned int BATTERY_CAPACITY = 850; // e.g. 850mAh battery
+const unsigned int BATTERY_CAPACITY = 2700; // e.g. 850mAh battery
+
+BQ27427 lipo(BATTERY_CAPACITY);
+
+
+
+//void printTimestampMillis(Print* logOutput) {
+//  char c[64];
+//  unsigned long mm = xTaskGetTickCount();//millis();
+//  int ms = mm % 1000;
+//  int s = mm / 1000;
+//  int m = s / 60;
+//  int h = m / 60;
+//  int d = h / 24;
+//  sprintf(c, "%02d:%02d:%02d:%02d.%03d ", d, h % 24, m % 60, s % 60, ms);
+//  logOutput->print(c);
+//}
+//
+//void setupLogging() {
+//  #ifndef DISABLE_LOGGING
+//    Log.begin(LOG_LEVEL, &Serial);
+//    Log.setPrefix(printTimestampMillis);
+//    Log.trace("setupLogging()" CR);
+//  #endif  //  #ifndef DISABLE_LOGGING
+//}
+
 
 void setupBQ274xx(void)
 {
@@ -32,22 +59,18 @@ void setupBQ274xx(void)
   // connected and communicating.
   if (!lipo.begin()) // begin() will return true if communication is successful
   {
-	// If communication fails, print an error message and loop forever.
-    Serial.println("Error: Unable to communicate with BQ274xx.");
+  // If communication fails, print an error message and loop forever.
+    Serial.println("Error: Unable to communicate with BQ27427.");
     Serial.println("  Check wiring and try again.");
     Serial.println("  (Battery must be plugged into Battery Babysitter!)");
     while (1) ;
   }
-  Serial.println("Connected to BQ274xx!");
-  
-  // Uset lipo.setCapacity(BATTERY_CAPACITY) to set the design capacity
-  // of your battery.
-  lipo.setCapacity(BATTERY_CAPACITY);
+  Serial.println("Connected to BQ27427!");
 }
 
 void printBatteryStats()
 {
-  // Read battery stats from the BQ274xx-G1A
+  // Read battery stats from the BQ27427
   unsigned int soc = lipo.soc();  // Read state-of-charge (%)
   unsigned int volts = lipo.voltage(); // Read battery voltage (mV)
   int current = lipo.current(AVG); // Read average current (mA)
@@ -71,6 +94,7 @@ void printBatteryStats()
 void setup()
 {
   Serial.begin(115200);
+//  setupLogging();
   setupBQ274xx();
 }
 
