@@ -3,6 +3,9 @@
 
 int i2c_burst_read_dt (const struct i2c_dt_spec* spec, uint8_t start_addr, uint8_t* buf, uint32_t num_bytes) {
     // Start the transmission to the device with the given address
+    
+    if ( spec == NULL || buf == NULL ) return -1;
+    
     Wire.beginTransmission(spec->addr);
     
     // Send the start address from which to begin reading
@@ -33,6 +36,9 @@ int i2c_burst_read_dt (const struct i2c_dt_spec* spec, uint8_t start_addr, uint8
 
 int i2c_write_dt ( const struct i2c_dt_spec* spec, const uint8_t* buf, uint32_t num_bytes ) {
     // Start the transmission to the device with the given address
+    
+    if ( spec == NULL || buf == NULL ) return -1;
+        
     Wire.beginTransmission(spec->addr);
 
     // Write each byte in the buffer to the I2C bus
@@ -50,6 +56,9 @@ int i2c_write_dt ( const struct i2c_dt_spec* spec, const uint8_t* buf, uint32_t 
 
 int i2c_reg_write_byte_dt ( const struct i2c_dt_spec* spec, uint8_t reg_addr, uint8_t value ) {
     // Start the transmission to the device with the given address
+    
+    if ( spec == NULL ) return -1;
+    
     Wire.beginTransmission(spec->addr);
     
     // Write the register address to which the data will be written
@@ -67,6 +76,9 @@ int i2c_reg_write_byte_dt ( const struct i2c_dt_spec* spec, uint8_t reg_addr, ui
 
 int i2c_reg_read_byte_dt (const struct i2c_dt_spec* spec, uint8_t reg_addr, uint8_t* value ) {
     // Start the transmission to the device with the given address
+    
+    if ( spec == NULL || value == NULL ) return -1;
+    
     Wire.beginTransmission(spec->addr);
     
     // Write the register address from which to read
@@ -96,22 +108,26 @@ int i2c_reg_read_byte_dt (const struct i2c_dt_spec* spec, uint8_t reg_addr, uint
 
 uint16_t sys_get_le16(const uint8_t *buf)
 {
+    if ( buf == NULL ) return 0;
     return (uint16_t)(buf[0] | ((uint16_t)buf[1] << 8));
 }
 
 void sys_put_le16(uint16_t val, uint8_t *buf)
 {
+    if ( buf == NULL ) return;
     buf[0] = (uint8_t)(val & 0xFF);          // Write LSB first
     buf[1] = (uint8_t)((val >> 8) & 0xFF);   // Write MSB second
 }
 
 uint16_t sys_get_be16(const uint8_t *buf)
 {
+    if ( buf == NULL ) return 0;
     return (uint16_t)((buf[0] << 8) | buf[1]);
 }
 
 void sys_put_be16(uint16_t val, uint8_t *buf)
 {
+    if ( buf == NULL ) return;
     buf[0] = (uint8_t)((val >> 8) & 0xFF);   // Write MSB first
     buf[1] = (uint8_t)(val & 0xFF);          // Write LSB second
 }

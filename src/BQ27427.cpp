@@ -1,20 +1,12 @@
 /******************************************************************************
+Inspired by:
+
 SparkFunBQ274xx.cpp
 BQ274xx Arduino Library Main Source File
 Jim Lindblom @ SparkFun Electronics
 May 9, 2016
 https://github.com/sparkfun/SparkFun_BQ274xx_Arduino_Library
 
-Implementation of all features of the BQ274xx LiPo Fuel Gauge.
-
-Hardware Resources:
-- Arduino Development Board
-- SparkFun Battery Babysitter
-
-Development environment specifics:
-Arduino 1.6.7
-SparkFun Battery Babysitter v1.0
-Arduino Uno (any 'duino should do)
 ******************************************************************************/
 
 #include "Arduino.h"
@@ -25,7 +17,7 @@ Arduino Uno (any 'duino should do)
  ************************** Initialization Functions *************************
  *****************************************************************************/
 // Initializes class variables
-BQ27427::BQ27427(uint16_t capacity, uint8_t deviceAddress, uint16_t designVoltage, uint16_t taperCurrent, uint16_t terminateVoltage)
+BQ27427::BQ27427(uint16_t capacity, uint8_t deviceAddress, uint16_t designVoltage, uint16_t taperCurrent, uint16_t terminateVoltage, uint8_t chemId)
 {
 	_wire.addr = deviceAddress;
 	_wire.bus = &_bq27427;
@@ -35,7 +27,7 @@ BQ27427::BQ27427(uint16_t capacity, uint8_t deviceAddress, uint16_t designVoltag
 	_bq27427_config.design_capacity = capacity; 
 	_bq27427_config.taper_current = taperCurrent; 
 	_bq27427_config.terminate_voltage = terminateVoltage; 
-	_bq27427_config.chemistry_id = 0x1200; // LiPo
+	_bq27427_config.chemistry_id = chemId; 
 	_bq27427_config.lazy_loading = true;
 }
 
