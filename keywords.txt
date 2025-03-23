@@ -1,0 +1,33 @@
+###############################################################
+# Syntax Coloring Map for SparkFun BQ274xx LiPo Gauge Library #
+###############################################################
+# Class
+###############################################################
+
+BQ27427	KEYWORD1
+
+###############################################################
+# Methods and Functions
+###############################################################
+
+begin	KEYWORD2
+voltage	KEYWORD2
+current	KEYWORD2
+capacity	KEYWORD2
+power	KEYWORD2
+soc	KEYWORD2
+soh	KEYWORD2
+temperature	KEYWORD2
+deviceType	KEYWORD2
+
+###############################################################
+# Constants
+###############################################################
+
+AVG	LITERAL1
+STBY	LITERAL1
+MAX	LITERAL1
+REMAIN	LITERAL1
+FULL	LITERAL1
+AVAIL	LITERAL1
+AVAIL_FULL	LITERAL1
