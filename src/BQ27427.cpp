@@ -17,7 +17,7 @@ https://github.com/sparkfun/SparkFun_BQ274xx_Arduino_Library
  ************************** Initialization Functions *************************
  *****************************************************************************/
 // Initializes class variables
-BQ27427::BQ27427(uint16_t capacity, uint8_t deviceAddress, uint16_t designVoltage, uint16_t taperCurrent, uint16_t terminateVoltage, uint8_t chemId)
+BQ27427::BQ27427(uint16_t capacity, uint8_t deviceAddress, uint16_t designVoltage, uint16_t taperCurrent, uint16_t terminateVoltage, uint16_t chemId)
 {
 	_wire.addr = deviceAddress;
 	_wire.bus = &_bq27427;
