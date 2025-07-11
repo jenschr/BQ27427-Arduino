@@ -31,7 +31,7 @@ public:
 					uint16_t designVoltage = 4200, 
 					uint16_t taperCurrent = 20, 
 					uint16_t terminateVoltage = 3000,
-          uint8_t chemId = BQ27427_CHEM_ID_A); // Lithium Cobalt Oxide (LiCoO₂)
+          uint16_t chemId = BQ27427_CHEM_ID_A); // Lithium Cobalt Oxide (LiCoO₂)
 	
 	/**
 	    Initializes I2C and verifies communication with the BQ274xx.
